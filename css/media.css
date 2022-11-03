@@ -1,10 +1,7 @@
 @media (max-width: 1200px) {
-
   .container {
     width: 90%;
     margin: 0 auto;
-
-
   }
   #home .home--blocks {
     position: absolute;
@@ -20,12 +17,8 @@
   }
   #slid .slid {
     zoom: 95%;
-
   }
-
 }
-
-
 @media (max-width: 1024px) {
   #travel .travel--block-one__left--content {
     padding: 20px 48px;
@@ -47,15 +40,10 @@
   #question .question--right details {
     width: 610px;
   }
-
   #travel .travel--block-one {
     width: 100%;
   }
-  #travel .travel--block-two {
-
-  }
 }
-
 @media (max-width: 992px) {
   #travel .travel--block-one__left--content {
     padding: 8px 32px;
@@ -91,19 +79,14 @@
     flex-wrap: wrap;
     height: 733px;
   }
-
-  element.style {
-  }
   #footer .footer--group {
     display: flex;
     flex-direction: column;
   }
 }
-
 @media (max-width: 768px) {
   #travel .travel--block-one {
     width: 74%;
-
   }
   #travel .travel--block-two {
     width: 74%;
@@ -121,7 +104,6 @@
     width: 70%;
   }
 }
-
 @media (max-width: 576px) {
   #home .home--blocks {
     position: absolute;
@@ -136,23 +118,4 @@
   }
 }
 
-@media (max-width: 451px) {
-
-}
-
-
-@media (max-width: 414px) {
-
-}
-
-@media (max-width: 400px) {
-
-}
-
-@media (max-width: 375px) {
-
-}
-
-@media (max-width: 320px) {
-
-}
+/*# sourceMappingURL=media.css.map */
