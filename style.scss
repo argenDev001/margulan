@@ -2,20 +2,31 @@
 
 
 #header {
-  background: black;
-
+  left: 0;
+  right: 0;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.87);
+  backdrop-filter: blur(1px);
+  padding: 10px 0;
+  z-index: 5;
 
   .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include alignment;
     padding: 15px 0;
+    animation: header ease-in-out 1s alternate;
+    @keyframes header {
+      from {
+        margin-top: -100%;
+      }
+      to {
+
+      }
+
+    }
 
     &--left {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #9099A3;
+      @include alignment;
+      color: $gw;
 
       nav {
         margin: 0 100px;
@@ -25,7 +36,7 @@
           font-weight: 500;
           font-size: 13px;
           line-height: 21px;
-          color: #9099A3;
+          color: $gw;
           transition: .4s;
 
           &:hover {
@@ -51,25 +62,25 @@
 
       ion-icon {
         font-size: 25px;
-        color: #9099A3;
+        color: $gw;
         margin: 0 30px;
         transition: .4s;
 
         &:hover {
-          color: #1A5CFF;
+          color: $b;
         }
       }
 
       button {
         width: 100px;
         height: 40px;
-        background: #1A5CFF;
+        background: $b;
         box-shadow: 0px 8px 20px rgba(26, 92, 255, 0.2);
         border-radius: 15px;
         border: none;
         transition: .4s;
         cursor: pointer;
-        color: white;
+        color: $w;
 
         &:hover {
           transform: scale(1.1);
@@ -80,9 +91,116 @@
 }
 
 
+#burger {
+  display: none;
+
+  #menu__toggle {
+    opacity: 0;
+  }
+
+  #menu__toggle:checked ~ .menu__btn > span {
+    transform: rotate(45deg);
+  }
+
+  #menu__toggle:checked ~ .menu__btn > span::before {
+    top: 0;
+    transform: rotate(0);
+  }
+
+  #menu__toggle:checked ~ .menu__btn > span::after {
+    top: 0;
+    transform: rotate(90deg);
+  }
+
+  #menu__toggle:checked ~ .menu__box {
+    visibility: visible;
+    left: 0;
+  }
+
+  .menu__btn {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    width: 26px;
+    height: 26px;
+
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .menu__btn > span,
+  .menu__btn > span::before,
+  .menu__btn > span::after {
+    display: block;
+    position: absolute;
+
+    width: 100%;
+    height: 2px;
+
+    background-color: #616161;
+
+    transition-duration: .25s;
+  }
+
+  .menu__btn > span::before {
+    content: '';
+    top: -8px;
+  }
+
+  .menu__btn > span::after {
+    content: '';
+    top: 8px;
+  }
+
+  .menu__box {
+    display: block;
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    left: -100%;
+
+    width: 300px;
+    height: 100%;
+
+    margin: 0;
+    padding: 80px 0;
+
+    list-style: none;
+
+    background-color: #ECEFF1;
+    box-shadow: 1px 0px 6px rgba(0, 0, 0, .2);
+
+    transition-duration: .25s;
+  }
+
+  .menu__item {
+    display: block;
+    padding: 12px 24px;
+
+    color: #333;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition-duration: .25s;
+  }
+
+  .menu__item:hover {
+    background-color: #CFD8DC;
+  }
+}
+
 #home {
   background: url("../img/scss bg.png") no-repeat center/cover;
   height: 700px;
+  padding-top: 100px;
+
 
   .home {
     &--right {
@@ -93,7 +211,7 @@
       h1 {
         font-weight: 400;
         font-size: 14px;
-        color: white;
+        color: $w;
         padding: 0 10px;
 
       }
@@ -111,7 +229,7 @@
       font-size: 36px;
       line-height: 54px;
       text-align: center;
-      color: white;
+      color: $w;
       padding-top: 160px;
 
     }
@@ -121,8 +239,8 @@
       width: 1200px;
       height: 160px;
       left: 160px;
-      top: 630px;
-      background: white;
+      top: 670px;
+      background: $w;
       border-radius: 15px;
       display: flex;
       justify-content: space-around;
@@ -131,7 +249,7 @@
 
       &:hover {
         transform: scale(1.1);
-        box-shadow: 0 0 100px 20px rgba(248, 204, 122, 0.74);
+        box-shadow: 0 0 100px 20px rgba(248, 204, 122, 0.22);
       }
 
       &__content {
@@ -144,14 +262,14 @@
         h1 {
           font-weight: 700;
           font-size: 20px;
-          color: #2C3E50;
+          color: $gb;
 
         }
 
         p {
           font-weight: 400;
           font-size: 14px;
-          color: #2C3E50;
+          color: $gb;
 
         }
 
@@ -188,8 +306,7 @@
         transition: .4s;
 
         &:hover {
-          transform: scale(1.1);
-          box-shadow: 0 0 100px 5px rgba(255, 255, 255, 0.63);
+
         }
 
         &--orange {
@@ -198,32 +315,31 @@
           background: orange;
           margin: 3px 10px;
           border-radius: 5px;
+          transition: .4s;
+
+          &:hover {
+            transform: scale(1.1);
+          }
 
         }
 
         &--one {
-          display: flex;
-          justify-content: space-between;
-          padding: 10px 0;
+          @include flex;
         }
 
         &--two {
-          display: flex;
-          justify-content: space-between;
-          padding: 10px 0;
+          @include flex;;
         }
 
         &--three {
-          display: flex;
-          justify-content: space-between;
-          padding: 10px 0;
+          @include flex;
 
           p {
             font-weight: 700;
             font-size: 14px;
             line-height: 21px;
             text-transform: capitalize;
-            color: white;
+            color: $w;
             margin: 10px 0;
           }
 
@@ -233,6 +349,11 @@
             background: gray;
             margin: 3px 10px;
             border-radius: 5px;
+            transition: .4s;
+
+            &:hover {
+              transform: scale(1.1);
+            }
 
           }
         }
@@ -244,18 +365,18 @@
           font-size: 36px;
           line-height: 54px;
           text-transform: capitalize;
-          color: white;
+          color: $w;
           margin: 10px 0;
         }
 
         button {
           width: 200px;
           height: 40px;
-          background: #1A5CFF;
+          background: $b;
           box-shadow: 0px 8px 20px rgba(26, 92, 255, 0.2);
           border-radius: 15px;
           border: none;
-          color: white;
+          color: $w;
           cursor: pointer;
           margin: 10px 0;
           transition: .4s;
@@ -267,7 +388,7 @@
         }
 
         p {
-          color: whitesmoke;
+          color: $w;
           width: 82%;
           margin: 10px 0;
         }
@@ -277,13 +398,13 @@
     &--right {
       width: 2000px;
       height: 476px;
-      background: white;
+      background: $w;
       border-radius: 15px;
       transition: .4s;
 
       &:hover {
         transform: scale(1.1);
-        box-shadow: 0 0 100px 5px rgba(255, 255, 255, 0.53);
+        box-shadow: 20px 20px 8px rgba(255, 255, 255, 0.19);
       }
 
       &__text-gr {
@@ -314,14 +435,14 @@
     h1 {
       font-weight: 700;
       font-size: 36px;
-      color: white;
+      color: $w;
       padding: 30px 0;
     }
 
     &--block-one {
       width: 1150px;
       height: 400px;
-      background: white;
+      background: $w;
       border-radius: 15px;
       display: flex;
       justify-content: space-between;
@@ -329,7 +450,7 @@
 
       &:hover {
         transform: scale(1.1);
-        box-shadow: 0 0 100px 10px rgba(196, 196, 241, 0.6);
+        box-shadow: 20px 20px 8px rgba(255, 255, 255, 0.19);
       }
 
       &__left {
@@ -353,9 +474,7 @@
         }
 
         &--top {
-          display: flex;
-          justify-content: space-evenly;
-          padding: 20px 0;
+          @include flex-two;
 
           h3 {
             font-weight: 700;
@@ -367,9 +486,7 @@
         }
 
         &--bottom {
-          display: flex;
-          justify-content: space-around;
-          padding: 20px 0;
+          @include flex-one;
 
           h3 {
             font-weight: 700;
@@ -389,13 +506,13 @@
       margin-top: 80px;
       width: 1155px;
       height: 400px;
-      background: white;
+      background: $w;
       border-radius: 15px;
       transition: .4s;
 
       &:hover {
         transform: scale(1.1);
-        box-shadow: 0 0 100px 10px rgba(196, 196, 241, 0.6);
+        box-shadow: 20px 20px 8px rgba(255, 255, 255, 0.19);
       }
 
       &__right {
@@ -420,8 +537,7 @@
         }
 
         &--bottom {
-          display: flex;
-          justify-content: space-around;
+          @include flex-three;
         }
 
       }
@@ -435,7 +551,7 @@
       border-radius: 15px;
       border: none;
       transition: .4s;
-      color: white;
+      color: $w;
       margin: 50px 0;
       cursor: pointer;
 
@@ -453,7 +569,7 @@
     h1 {
       font-weight: 700;
       font-size: 36px;
-      color: #FFFFFF;
+      color: $w;
       padding: 20px 0;
 
     }
@@ -472,7 +588,7 @@
     .swiper-slide {
       text-align: center;
       font-size: 18px;
-      background: #fff;
+      background: $w;
 
 
     }
@@ -487,7 +603,7 @@
     &--block {
       width: 1140px;
       height: 400px;
-      background: white;
+      background: $w;
       border-radius: 15px;
       display: flex;
 
@@ -506,7 +622,7 @@
           h1 {
             font-weight: 700;
             font-size: 20px;
-            color: #2C3E50;
+            color: $gb;
             padding: 20px;
 
 
@@ -529,10 +645,10 @@
       button {
         width: 240px;
         height: 40px;
-        background: #1A5CFF;
+        background: $b;
         box-shadow: 0px 8px 20px rgba(26, 92, 255, 0.2);
         border-radius: 15px;
-        color: white;
+        color: $w;
         border: none;
         transition: .4s;
         cursor: pointer;
@@ -556,7 +672,7 @@
       &--shadow {
         width: 400px;
         height: 400px;
-        background: #1A5CFF;
+        background: $b;
         filter: blur(280px);
         margin-top: 200px;
       }
@@ -569,7 +685,7 @@
           font-weight: 400;
           font-size: 16px;
           line-height: 24px;
-          color: #FFFFFF;
+          color: $w;
           margin-left: 130px;
         }
 
@@ -583,7 +699,7 @@
             &--gray {
               width: 80px;
               height: 20px;
-              background: #9099A3;
+              background: $gw;
               border-radius: 5px;
               margin: 5px 0;
               display: flex;
@@ -595,7 +711,7 @@
 
         details {
           width: 700px;
-          border: 2px solid white;
+          border: 2px solid $w;
           border-radius: 20px;
           padding: 4px 20px;
 
@@ -604,21 +720,20 @@
           }
 
           summary {
-            color: #FFFFFF;
-
+            color: $w;
 
             button {
               width: 100px;
               height: 40px;
-              background: #1A5CFF;
+              background: $b;
               box-shadow: 0px 8px 20px rgba(26, 92, 255, 0.2);
               border-radius: 15px;
               color: #FFFFFF;
               transition: .4s;
 
               &:hover {
-                background: white;
-                color: #1A5CFF;
+                background: $w;
+                color: $b;
               }
             }
 
@@ -626,10 +741,11 @@
               font-weight: 700;
               font-size: 16px;
               line-height: 24px;
-              color: #FFFFFF;
+              color: $w;
 
             }
           }
+
 
         }
       }
@@ -639,10 +755,10 @@
       button {
         width: 240px;
         height: 40px;
-        background: #1A5CFF;
+        background: $b;
         box-shadow: 0px 8px 20px rgba(26, 92, 255, 0.2);
         border-radius: 15px;
-        color: #FFFFFF;
+        color: $w;
         transition: .4s;
         margin: 30px 0;
 
@@ -653,9 +769,7 @@
     }
 
     &--blocks {
-      display: flex;
-      justify-content: space-between;
-      padding: 50px 0;
+      @include flex-four;
 
       &__group {
         h3 {
@@ -663,7 +777,7 @@
           font-size: 20px;
           line-height: 30px;
           text-transform: capitalize;
-          color: #FFFFFF;
+          color: $w;
           padding: 10px 0;
         }
 
@@ -671,13 +785,13 @@
           font-weight: 400;
           font-size: 16px;
           line-height: 24px;
-          color: #FFFFFF;
+          color: $w;
         }
 
         &--blue {
           width: 80px;
           height: 80px;
-          background: #1A5CFF;
+          background: $b;
           border-radius: 10px;
           display: flex;
           justify-content: center;
@@ -691,11 +805,56 @@
 
           ion-icon {
             font-size: 40px;
-            color: #FFFFFF;
+            color: $w;
           }
         }
       }
     }
+  }
+}
+
+#fancybox {
+  background: black;
+
+  .fancybox {
+    @include fancybox;
+
+    h1 {
+      color: $w;
+      font-size: 50px;
+      margin: 30px;
+    }
+
+    button {
+      padding: 10px 40px;
+      background: $b;
+      border-radius: 10px;
+      color: $w;
+      display: flex;
+      align-items: center;
+      margin: 30px 0;
+      font-size: 20px;
+      transition: .4s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      ion-icon {
+        font-size: 35px;
+      }
+    }
+
+
+    &--center {
+      @include fancybox;
+
+      img {
+        width: 80%;
+        border-radius: 20px;
+      }
+    }
+
   }
 }
 
@@ -713,7 +872,7 @@
         font-size: 36px;
         line-height: 54px;
         text-transform: capitalize;
-        color: #FFFFFF;
+        color: $w;
 
       }
     }
@@ -729,14 +888,14 @@
 
         &--texts {
           font-size: 20px;
-          color: white;
+          color: $w;
         }
 
         &--icons {
           ion-icon {
             font-size: 20px;
             margin: 0 10px;
-            color: white;
+            color: $w;
           }
         }
       }
@@ -753,7 +912,7 @@
     h1 {
       font-weight: 700;
       font-size: 36px;
-      color: #FFFFFF;
+      color: $w;
       text-align: center;
       letter-spacing: 4px;
     }
@@ -762,7 +921,7 @@
       font-weight: 400;
       font-size: 18px;
       line-height: 27px;
-      color: #9099A3;
+      color: $gw;
       letter-spacing: 2px;
       padding: 20px 0;
       text-align: center;
@@ -777,12 +936,12 @@
       button {
         width: 200px;
         height: 40px;
-        background: #1A5CFF;
+        background: $b;
         box-shadow: 0px 8px 20px rgba(26, 92, 255, 0.2);
         border-radius: 15px;
         transition: .4s;
         cursor: pointer;
-        color: #FFFFFF;
+        color: $w;
 
         &:hover {
           transform: scale(1.1);
@@ -813,7 +972,7 @@
 
           &__icon {
             font-size: 30px;
-            color: #FFFFFF;
+            color: $w;
             cursor: pointer;
             margin: 0 10px;
           }
@@ -838,7 +997,7 @@
             h1 {
               font-weight: 400;
               font-size: 30px;
-              color: white;
+              color: $w;
             }
 
             &--bottom-content {
@@ -849,11 +1008,11 @@
                 button {
                   width: 200px;
                   height: 40px;
-                  background: #1A5CFF;
+                  background: $b;
                   border-radius: 15px;
                   border: none;
                   transition: .4s;
-                  color: #FFFFFF;
+                  color: $w;
 
                   &:hover {
                     transform: scale(1.1);
@@ -872,8 +1031,7 @@
   background: black;
 
   .question {
-    display: flex;
-    justify-content: space-between;
+    @include flex-five;
     padding-top: 100px;
 
     &--left {
@@ -881,20 +1039,20 @@
         font-weight: 700;
         font-size: 36px;
         line-height: 54px;
-        color: #FFFFFF;
+        color: $w;
       }
 
       h2 {
         font-weight: 700;
         font-size: 154px;
         line-height: 176px;
-        color: #1A5CFF;
+        color: $b;
         text-align: center;
       }
     }
 
     &--right {
-      color: #9099A3;
+      color: $gw;
 
       details {
 
@@ -907,7 +1065,6 @@
       }
 
       summary {
-        marker: none;
         margin: 10px 20px;
         font-size: 20px;
       }
@@ -944,16 +1101,16 @@
       &__two {
         display: flex;
         flex-direction: column;
-        color: white;
+        color: $w;
         line-height: 40px;
 
         button {
           width: 100px;
           height: 40px;
-          background: #1A5CFF;
+          background: $b;
           box-shadow: 0px 5px 8px rgba(26, 92, 255, 0.2);
           border-radius: 15px;
-          color: white;
+          color: $w;
           cursor: pointer;
           transition: .4s;
           margin: 10px 0;
@@ -964,23 +1121,23 @@
         }
 
         a {
-          color: #9099A3;
+          color: $gw;
           transition: .4s;
           cursor: pointer;
 
           &:hover {
             transform: scale(1.1);
-            color: #1A5CFF;
+            color: $b;
           }
         }
       }
 
       &__three {
-        color: white;
+        color: $w;
         line-height: 40px;
 
         p {
-          color: #9099A3;
+          color: $gw;
         }
 
         ion-icon {
@@ -991,38 +1148,43 @@
 
           &:hover {
             transform: scale(1.5);
-            color: #1A5CFF;
+            color: $b;
           }
         }
       }
 
       &__four {
-        color: white;
+        color: $w;
+        position: relative;
 
         p {
-          color: #9099A3;
+          color: $gw;
           line-height: 40px;
         }
 
         input {
-          width: 200px;
+          width: 300px;
           height: 40px;
-          background: #FFFFFF;
+          background: $w;
           box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.05);
           border-radius: 15px;
           border: none;
+          margin: 20px 0;
 
         }
 
         button {
-          width: 80px;
+          position: absolute;
+          left: 210px;
+          top: 65px;
+          width: 100px;
           height: 40px;
-          background: #1A5CFF;
+          background: $b;
           box-shadow: 0px 5px 8px rgba(26, 92, 255, 0.2);
           border-radius: 15px;
           transition: .4s;
           cursor: pointer;
-          color: white;
+          color: $w;
           margin: 0 10px;
 
           &:hover {
@@ -1037,15 +1199,14 @@
     }
 
     &--bottom {
-      display: flex;
-      justify-content: space-between;
+      @include flex-five;
       margin-top: 50px;
 
       &__left {
         font-weight: 400;
         font-size: 5px;
         line-height: 15px;
-        color: #9099A3;
+        color: $gw;
 
       }
 
@@ -1053,7 +1214,7 @@
         font-weight: 400;
         font-size: 5px;
         line-height: 15px;
-        color: #9099A3;
+        color: $gw;
         display: flex;
         align-items: center;
 

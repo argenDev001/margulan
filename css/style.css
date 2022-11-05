@@ -22,13 +22,25 @@ button {
 }
 
 #header {
-  background: black;
+  left: 0;
+  right: 0;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.87);
+  backdrop-filter: blur(1px);
+  padding: 10px 0;
+  z-index: 5;
 }
 #header .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 0;
+  animation: header ease-in-out 1s alternate;
+}
+@keyframes header {
+  from {
+    margin-top: -100%;
+  }
 }
 #header .header--left {
   display: flex;
@@ -85,9 +97,89 @@ button {
   transform: scale(1.1);
 }
 
+#burger {
+  display: none;
+}
+#burger #menu__toggle {
+  opacity: 0;
+}
+#burger #menu__toggle:checked ~ .menu__btn > span {
+  transform: rotate(45deg);
+}
+#burger #menu__toggle:checked ~ .menu__btn > span::before {
+  top: 0;
+  transform: rotate(0);
+}
+#burger #menu__toggle:checked ~ .menu__btn > span::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+#burger #menu__toggle:checked ~ .menu__box {
+  visibility: visible;
+  left: 0;
+}
+#burger .menu__btn {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  z-index: 1;
+}
+#burger .menu__btn > span,
+#burger .menu__btn > span::before,
+#burger .menu__btn > span::after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #616161;
+  transition-duration: 0.25s;
+}
+#burger .menu__btn > span::before {
+  content: "";
+  top: -8px;
+}
+#burger .menu__btn > span::after {
+  content: "";
+  top: 8px;
+}
+#burger .menu__box {
+  display: block;
+  position: fixed;
+  visibility: hidden;
+  top: 0;
+  left: -100%;
+  width: 300px;
+  height: 100%;
+  margin: 0;
+  padding: 80px 0;
+  list-style: none;
+  background-color: #ECEFF1;
+  box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.2);
+  transition-duration: 0.25s;
+}
+#burger .menu__item {
+  display: block;
+  padding: 12px 24px;
+  color: #333;
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition-duration: 0.25s;
+}
+#burger .menu__item:hover {
+  background-color: #CFD8DC;
+}
+
 #home {
   background: url("../img/scss bg.png") no-repeat center/cover;
   height: 700px;
+  padding-top: 100px;
 }
 #home .home--right {
   display: flex;
@@ -119,7 +211,7 @@ button {
   width: 1200px;
   height: 160px;
   left: 160px;
-  top: 630px;
+  top: 670px;
   background: white;
   border-radius: 15px;
   display: flex;
@@ -129,7 +221,7 @@ button {
 }
 #home .home--blocks:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 100px 20px rgba(248, 204, 122, 0.74);
+  box-shadow: 0 0 100px 20px rgba(248, 204, 122, 0.22);
 }
 #home .home--blocks__content {
   display: flex;
@@ -174,16 +266,16 @@ button {
   flex-wrap: wrap;
   transition: 0.4s;
 }
-#about .about--left__block:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 100px 5px rgba(255, 255, 255, 0.63);
-}
 #about .about--left__block--orange {
   width: 30px;
   height: 50px;
   background: orange;
   margin: 3px 10px;
   border-radius: 5px;
+  transition: 0.4s;
+}
+#about .about--left__block--orange:hover {
+  transform: scale(1.1);
 }
 #about .about--left__block--one {
   display: flex;
@@ -214,6 +306,10 @@ button {
   background: gray;
   margin: 3px 10px;
   border-radius: 5px;
+  transition: 0.4s;
+}
+#about .about--left__block--three__gray:hover {
+  transform: scale(1.1);
 }
 #about .about--left__contents h1 {
   font-weight: 700;
@@ -239,7 +335,7 @@ button {
   transform: scale(1.1);
 }
 #about .about--left__contents p {
-  color: whitesmoke;
+  color: white;
   width: 82%;
   margin: 10px 0;
 }
@@ -252,7 +348,7 @@ button {
 }
 #about .about--right:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 100px 5px rgba(255, 255, 255, 0.53);
+  box-shadow: 20px 20px 8px rgba(255, 255, 255, 0.19);
 }
 #about .about--right__text-gr {
   margin: 40px 20px;
@@ -289,7 +385,7 @@ button {
 }
 #travel .travel--block-one:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 100px 10px rgba(196, 196, 241, 0.6);
+  box-shadow: 20px 20px 8px rgba(255, 255, 255, 0.19);
 }
 #travel .travel--block-one__left--content {
   padding: 40px 80px;
@@ -340,7 +436,7 @@ button {
 }
 #travel .travel--block-two:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 100px 10px rgba(196, 196, 241, 0.6);
+  box-shadow: 20px 20px 8px rgba(255, 255, 255, 0.19);
 }
 #travel .travel--block-two__right--content {
   padding: 60px 60px;
@@ -385,7 +481,7 @@ button {
 #slid .slid h1 {
   font-weight: 700;
   font-size: 36px;
-  color: #FFFFFF;
+  color: white;
   padding: 20px 0;
 }
 #slid .slid .swiper {
@@ -400,7 +496,7 @@ button {
 #slid .slid .swiper-slide {
   text-align: center;
   font-size: 18px;
-  background: #fff;
+  background: white;
 }
 #slid .slid .swiper-slide img {
   display: block;
@@ -474,7 +570,7 @@ button {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #FFFFFF;
+  color: white;
   margin-left: 130px;
 }
 #accordion .accordion--general__group--content {
@@ -504,7 +600,7 @@ button {
   margin-bottom: 40px;
 }
 #accordion .accordion--general__group details summary {
-  color: #FFFFFF;
+  color: white;
 }
 #accordion .accordion--general__group details summary button {
   width: 100px;
@@ -523,7 +619,7 @@ button {
   font-weight: 700;
   font-size: 16px;
   line-height: 24px;
-  color: #FFFFFF;
+  color: white;
 }
 #accordion .accordion--btn button {
   width: 240px;
@@ -531,7 +627,7 @@ button {
   background: #1A5CFF;
   box-shadow: 0px 8px 20px rgba(26, 92, 255, 0.2);
   border-radius: 15px;
-  color: #FFFFFF;
+  color: white;
   transition: 0.4s;
   margin: 30px 0;
 }
@@ -548,14 +644,14 @@ button {
   font-size: 20px;
   line-height: 30px;
   text-transform: capitalize;
-  color: #FFFFFF;
+  color: white;
   padding: 10px 0;
 }
 #accordion .accordion--blocks__group p {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #FFFFFF;
+  color: white;
 }
 #accordion .accordion--blocks__group--blue {
   width: 80px;
@@ -573,7 +669,47 @@ button {
 }
 #accordion .accordion--blocks__group--blue ion-icon {
   font-size: 40px;
-  color: #FFFFFF;
+  color: white;
+}
+
+#fancybox {
+  background: black;
+}
+#fancybox .fancybox {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+#fancybox .fancybox h1 {
+  color: white;
+  font-size: 50px;
+  margin: 30px;
+}
+#fancybox .fancybox button {
+  padding: 10px 40px;
+  background: #1A5CFF;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  margin: 30px 0;
+  font-size: 20px;
+  transition: 0.4s;
+}
+#fancybox .fancybox button:hover {
+  transform: scale(1.1);
+}
+#fancybox .fancybox button ion-icon {
+  font-size: 35px;
+}
+#fancybox .fancybox--center {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+#fancybox .fancybox--center img {
+  width: 80%;
+  border-radius: 20px;
 }
 
 #concept {
@@ -589,7 +725,7 @@ button {
   font-size: 36px;
   line-height: 54px;
   text-transform: capitalize;
-  color: #FFFFFF;
+  color: white;
 }
 #concept .concept--right__one {
   display: flex;
@@ -617,7 +753,7 @@ button {
 #window .window h1 {
   font-weight: 700;
   font-size: 36px;
-  color: #FFFFFF;
+  color: white;
   text-align: center;
   letter-spacing: 4px;
 }
@@ -643,7 +779,7 @@ button {
   border-radius: 15px;
   transition: 0.4s;
   cursor: pointer;
-  color: #FFFFFF;
+  color: white;
 }
 #window .window--btn button:hover {
   transform: scale(1.1);
@@ -670,7 +806,7 @@ button {
 }
 #window .window--modal__bg--square__icon {
   font-size: 30px;
-  color: #FFFFFF;
+  color: white;
   cursor: pointer;
   margin: 0 10px;
 }
@@ -704,7 +840,7 @@ button {
   border-radius: 15px;
   border: none;
   transition: 0.4s;
-  color: #FFFFFF;
+  color: white;
 }
 #window .window--modal__bg--square__inputs--bottom-content__btn button:hover {
   transform: scale(1.1);
@@ -722,7 +858,7 @@ button {
   font-weight: 700;
   font-size: 36px;
   line-height: 54px;
-  color: #FFFFFF;
+  color: white;
 }
 #question .question--left h2 {
   font-weight: 700;
@@ -742,7 +878,6 @@ button {
   justify-content: center;
 }
 #question .question--right summary {
-  marker: none;
   margin: 10px 20px;
   font-size: 20px;
 }
@@ -815,21 +950,26 @@ button {
 }
 #footer .footer--group__four {
   color: white;
+  position: relative;
 }
 #footer .footer--group__four p {
   color: #9099A3;
   line-height: 40px;
 }
 #footer .footer--group__four input {
-  width: 200px;
+  width: 300px;
   height: 40px;
-  background: #FFFFFF;
+  background: white;
   box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.05);
   border-radius: 15px;
   border: none;
+  margin: 20px 0;
 }
 #footer .footer--group__four button {
-  width: 80px;
+  position: absolute;
+  left: 210px;
+  top: 65px;
+  width: 100px;
   height: 40px;
   background: #1A5CFF;
   box-shadow: 0px 5px 8px rgba(26, 92, 255, 0.2);
